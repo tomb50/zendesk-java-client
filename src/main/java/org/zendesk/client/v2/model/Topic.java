@@ -234,12 +234,4 @@ public class Topic implements SearchResultEntity
     this.uploads = uploads;
   }
 
-
-  public static enum TopicType
-  {
-    Articles,
-    Questions,
-    Ideas;
-  }
-
 }
