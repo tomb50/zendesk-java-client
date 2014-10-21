@@ -589,6 +589,12 @@ public class Zendesk implements Closeable {
 
     // TODO getOrganizationRelatedInformation
 
+    public List<OrganizationFields> getOrganizationFields() {
+      return complete(submit(req("GET", cnst("/organization_fields.json")),
+                             handleList(OrganizationFields.class, "organization_fields")));
+    }
+
+
     public Organization getOrganization(long id) {
         return complete(submit(req("GET", tmpl("/organizations/{id}.json").set("id", id)),
                 handle(Organization.class, "organization")));
@@ -782,7 +788,7 @@ public class Zendesk implements Closeable {
       complete(submit(req("DELETE", tmpl("/forums/{id}.json").set("id", forum.getId())), handleStatus()));
     }
 
-    public Iterable<Topic> Topics() {
+    public Iterable<Topic> getTopics() {
       return new PagedIterable<Topic>(cnst("/topics.json"), handleList(Topic.class, "topics"));
     }
 
@@ -833,6 +839,14 @@ public class Zendesk implements Closeable {
         return new PagedIterable<SearchResultEntity>(tmpl("/search.json{?query}").set("query", query),
                 handleSearchList("results"));
     }
+
+
+  public List<IncrementalTicket> getRecentTickets(Long start_time)
+  {
+    return complete(submit(req("GET",tmpl("/exports/tickets.json{?start_time}").set( "start_time",start_time )),
+                                                    handleList(IncrementalTicket.class,"results")));
+  }
+
 
     public <T extends SearchResultEntity> Iterable<T> getSearchResults(Class<T> type, String query) {
         String typeName = null;

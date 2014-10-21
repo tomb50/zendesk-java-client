@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author stephenc
@@ -22,8 +23,20 @@ public class Organization implements SearchResultEntity {
     private Boolean sharedTickets;
     private Boolean sharedComments;
     private List<String> tags;
+    private List<CustomField> organisationFields;
 
-    public Organization() {
+  @JsonProperty("organization_fields")
+  public List<CustomField> getOrganisationFields()
+  {
+    return organisationFields;
+  }
+
+  public void setOrganisationFields( final List<CustomField> organisationFields )
+  {
+    this.organisationFields = organisationFields;
+  }
+
+  public Organization() {
     }
 
     @JsonProperty("created_at")

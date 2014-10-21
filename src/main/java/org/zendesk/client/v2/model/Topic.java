@@ -11,7 +11,7 @@ public class Topic implements SearchResultEntity
   private String url;
   private String title;
   private String body;
-  private TopicType topicType;
+  private String topicType;
   private Long submitterId;
   private Long updaterId;
   private Long forumId;
@@ -69,12 +69,12 @@ public class Topic implements SearchResultEntity
   }
 
   @JsonProperty("topic_type")
-  public TopicType getTopicType()
+  public String getTopicType()
   {
     return topicType;
   }
 
-  public void setTopicType( final TopicType topicType )
+  public void setTopicType( final String topicType )
   {
     this.topicType = topicType;
   }
